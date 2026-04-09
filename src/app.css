@@ -2,10 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-slate-50 text-slate-900 antialiased;
 }
-
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: 120px;
+  line-height: 1.1;
+  letter-spacing: -.04em;
+
+}
+
+h2 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: 61px;
+  line-height: 1.1;
+  letter-spacing: 0em;
+  padding-bottom: 20px;
+}
+
+h3 {
+  font-family: 'Instrument Serif', serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: 0em;
+}
+
+p {
+    @apply  text-slate-600;
 }

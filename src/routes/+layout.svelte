@@ -1,23 +1,129 @@
-<script>
-  export let data;
+<script lang="ts">
+  import "../app.css";
+
+  let scrollY = 0;
+  let logoClass = "w-30";
+  let mobileMenuOpen = false;
+
+  $: logoClass = scrollY > 0 ? "w-20" : "w-30";
+  $: opacity = scrollY > 0 ? 0.9 : 1;
+
+  function toggleMenu() {
+    mobileMenuOpen = !mobileMenuOpen;
+  }
+
+  function closeMenu() {
+    mobileMenuOpen = false;
+  }
+
+  const navLinks = [
+    { href: "#venue", label: "Venue" },
+    { href: "#travel", label: "Travel" },
+    { href: "#schedule", label: "Schedule" },
+    { href: "#registry", label: "Registry" },
+    { href: "#things-to-do", label: "Things To Do" },
+    { href: "#faq", label: "FAQs" },
+  ];
 </script>
 
-<div class="min-h-screen bg-gradient-to-b from-white via-slate-50 to-slate-100 text-slate-900">
-  <header class="border-b border-slate-200 bg-white/80 backdrop-blur-md">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-      <div>
-        <p class="text-sm uppercase tracking-[0.3em] text-slate-500">Nicole &amp; Matt</p>
-        <h1 class="mt-2 text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">Wedding Website</h1>
-      </div>
-      <nav class="hidden space-x-6 text-sm font-medium text-slate-600 md:flex">
-        <a href="#details" class="hover:text-slate-900">Details</a>
-        <a href="#schedule" class="hover:text-slate-900">Schedule</a>
-        <a href="#travel" class="hover:text-slate-900">Travel</a>
-      </nav>
-    </div>
-  </header>
+<div class="bg-white text-slate-900">
+  <nav class="w-full sticky top-0 z-[10000] bg-white/40 backdrop-blur-lg">
+    <div
+      class="max-w-[1200px] flex mx-auto h-14 items-center justify-between px-5 lg:px-6"
+    >
+      <a href="/" class="">
+        <img
+          src="/images/nav-logo-transparent.png"
+          alt="Nicole & Dan"
+          class="w-[115px]"
+        />
+      </a>
 
-  <main class="mx-auto max-w-6xl px-6 py-10">
+      <!-- Desktop menu -->
+      <ul
+        class="hidden items-center gap-7 text-[12px] font-medium uppercase tracking-[0.08em] text-slate-700 sm:flex"
+      >
+        {#each navLinks as link}
+          <li>
+            <a href={link.href} class="transition-colors hover:text-slate-900"
+              >{link.label}</a
+            >
+          </li>
+        {/each}
+      </ul>
+
+      <!-- Hamburger button (mobile only) -->
+      <button
+        class="sm:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] focus:outline-none"
+        aria-label="Toggle menu"
+        aria-expanded={mobileMenuOpen}
+        on:click={toggleMenu}
+      >
+        <span
+          class="block h-[1.5px] w-5 bg-slate-700 transition-all duration-300 origin-center"
+          class:rotate-45={mobileMenuOpen}
+          class:translate-y-[6.5px]={mobileMenuOpen}
+        ></span>
+        <span
+          class="block h-[1.5px] w-5 bg-slate-700 transition-all duration-300"
+          class:opacity-0={mobileMenuOpen}
+          class:scale-x-0={mobileMenuOpen}
+        ></span>
+        <span
+          class="block h-[1.5px] w-5 bg-slate-700 transition-all duration-300 origin-center"
+          class:-rotate-45={mobileMenuOpen}
+          class:-translate-y-[6.5px]={mobileMenuOpen}
+        ></span>
+      </button>
+    </div>
+
+    <!-- Mobile dropdown menu -->
+    <div
+      class="sm:hidden overflow-hidden transition-all duration-300 ease-in-out"
+      style="max-height: {mobileMenuOpen ? '400px' : '0px'}; opacity: {mobileMenuOpen ? '1' : '0'};"
+    >
+      <ul
+        class="flex flex-col border-t border-slate-100 bg-white/80 backdrop-blur-lg px-5 pb-4 pt-3 text-[12px] font-medium uppercase tracking-[0.08em] text-slate-700"
+      >
+        {#each navLinks as link, i}
+          <li
+            class="transition-all duration-300"
+            style="transition-delay: {mobileMenuOpen ? i * 40 : 0}ms; transform: translateY({mobileMenuOpen ? '0' : '-8px'}); opacity: {mobileMenuOpen ? '1' : '0'};"
+          >
+            <a
+              href={link.href}
+              class="block py-3 transition-colors hover:text-slate-900 border-b border-slate-100 last:border-0"
+              on:click={closeMenu}>{link.label}</a
+            >
+          </li>
+        {/each}
+      </ul>
+    </div>
+  </nav>
+
+  <main class="mx-auto">
     <slot />
   </main>
+  <footer
+    class="z-10 flex h-16 w-full items-center justify-center border-t border-gray-100 bg-white mx-auto"
+  >
+    <div
+      class="flex w-full max-w-[1280px] mx-auto px-4 py-4 text-xs text-gray-500 sm:px-8 md:px-20 items-center justify-center"
+    >
+      <p class="flex items-center gap-1">
+        designed and developed with
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="w-3 h-3 text-black"
+        >
+          <path
+            d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"
+          />
+        </svg>
+        by nicole
+      </p>
+    </div>
+  </footer>
 </div>
