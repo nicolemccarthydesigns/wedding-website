@@ -37,7 +37,7 @@
     <h1 class="lg:text-[120px] md:text-[90px] text-[65px] animate-fade-in">
       Nicole & Dan
     </h1>
-    <p class="text-slate-600">September 26, 2026</p>
+    <!-- <p class="text-slate-600">September 26, 2026</p> -->
   </div>
   <!-- <div
       role="img"
@@ -59,7 +59,7 @@
     <div class="max-w-lg">
       <h2 class="">See you in Maine</h2>
       <img src="/images/maine-icon.png" alt="maine" class="w-8 mx-auto pb-5" />
-      <h2 class="">9.26.26</h2>
+      <h2 class="">09.26.26</h2>
       <p class=" text-lg">
         We're getting married in beautiful Waterford, Maine, just minutes away
         from Nicole's family cabin, and we'd love for you to join us. This
@@ -218,7 +218,7 @@
         recommendations.
       </p>
     </div>
-    <div class="h-[1px] bg-slate-200 w-[1200px] mx-auto my-10"></div>
+    <div class="h-[1px] bg-slate-200 w-full mx-auto my-10"></div>
     <div id="faq" class="max-w-xl mx-auto my-20 scroll-mt-20">
       <!-- <p class=" uppercase text-sm tracking-[0.08em]">Schedule</p> -->
       <h2 class="">FAQs</h2>
